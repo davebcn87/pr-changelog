@@ -5,21 +5,21 @@ A rubygem to create a changelog automatically from an iOS project last version u
 
 ## Installation
 
-  gem install pr-changelog
+    gem install pr-changelog
   
 ## Usage
 
 Inside the project root
   
-  chlog show
+    chlog show
   
 ## Requirements
 
   * Set up the new version when you start working on that
   
   * Info.plist file must be named as the xcodeproj file:
-    <nameOfTheProject>.xcodeproj
-    <nameOfTheProject>-Info.plist
+    `<nameOfTheProject>.xcodeproj`
+    `<nameOfTheProject>-Info.plist`
 
   
 ## TODO 
