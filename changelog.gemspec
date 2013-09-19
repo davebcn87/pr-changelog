@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "Use this command to generate a changelog file for the current version"
   s.authors     = ["David Cortés"]
   s.email       = 'david@lafosca.cat'
-  s.files       = ["lib/changelog_utils.rb","lib/changelog.rb"]
+  s.files       = ["lib/changelog_utils.rb"]
   s.homepage    =
     'http://rubygems.org/gems/changelog'
   s.license       = 'MIT'
