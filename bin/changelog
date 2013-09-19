@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'changelog_utils'
+require 'commander/import'
+
+program :version, '0.0.1'
+program :description, 'changelog will make a change log for an iOS project for current version'
+ 
+command :show do |c|
+  c.syntax = 'changelog show [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+	if !ChangelogUtils.isXcodeDirectory
+		puts "changelog should be used in a xcode directory"
+	else
+		currentVersion = ChangelogUtils.showVersion
+		puts currentVersion
+		puts "=============="
+
+		while (ChangelogUtils.showVersion == currentVersion)
+			ChangelogUtils.goBack
+			if (ChangelogUtils.isPullRequestMerge)
+				 puts ChangelogUtils.printCurrentChange
+			end
+		end
+	end
+
+	ChangelogUtils.goForward
+  end
+end
+
