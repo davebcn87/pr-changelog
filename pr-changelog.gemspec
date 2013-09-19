@@ -12,6 +12,5 @@ Gem::Specification.new do |s|
 	 'https://github.com/davebcn87/pr-changelog'
   s.license       = 'MIT'
   s.add_dependency "commander", "~> 4.1.5"
-  s.add_dependency "mechanize"
   s.require_paths = ["lib"]
 end
