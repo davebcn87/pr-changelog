@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'changelog_utils'
+require 'pr_changelog_utils'
 require 'commander/import'
 
 program :version, '0.0.1'
