@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.date        = '2013-09-10'
   s.executables << 'chlog'
   s.summary     = "Create a changelog for an iOS app using git history of Pull Requests already merged and xcode version"
-  s.description = "Use this command to generate a changelog output for the current version"
+  s.description = "With this gem you can generate a changelog using Pull Requests logs on your local branch"
   s.authors     = ["David Cortés"]
   s.email       = 'david@lafosca.cat'
   s.files       = ["lib/pr_changelog_utils.rb"]
