@@ -1,17 +1,17 @@
-changelog
+pr-changelog (Pull Request Changelog)
 =========
 
-A rubygem to create a changelog automatically from an iOS project last version. 
+A rubygem to create a changelog automatically from an iOS project last version using pull requests merged log. 
 
 ## Installation
 
-  gem install changelog
+  gem install pr-changelog
   
 ## Usage
 
 Inside the project root
   
-  changelog show
+  chlog show
   
 ## Requirements
 
