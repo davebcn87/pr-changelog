@@ -2,6 +2,8 @@
 
 class ChangelogUtils
 
+	attr_accessor :branch_name
+
 	def self.getProjectName
 		projectFiles = Dir["*.xcodeproj"]
 		if (projectFiles.size()>0)
@@ -35,11 +37,12 @@ class ChangelogUtils
 	end
 	
 	def self.goBack
+		@branch_name = self.currentBranchName if !@branch_name
 		`git checkout HEAD^ >/dev/null 2>/dev/null`
 	end
 	
 	def self.goForward
-		`git checkout develop  >/dev/null 2>/dev/null`
+		`git checkout #{@branch_name} >/dev/null 2>/dev/null`
 	end
 
 	def self.getLastMessageFromGit
@@ -53,4 +56,9 @@ class ChangelogUtils
 	def self.getPullRequestHash
 		`git log -1 --format="%s" | cut -f 4 -d ' '`
 	end
+
+	def self.currentBranchName
+		branch = `git branch --no-color 2> /dev/null`.strip.scan(/\*\s(.*)/)
+		return branch[0][0] if branch.size()>0 and branch[0].size()>0
+	end 
 end
