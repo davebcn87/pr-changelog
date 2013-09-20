@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'pr-changelog'
-  s.version     = '0.1.2'
+  s.version     = '0.1.3'
   s.date        = '2013-09-10'
   s.executables << 'chlog'
   s.summary     = "Create a changelog for an iOS app using git history of Pull Requests already merged and xcode version"

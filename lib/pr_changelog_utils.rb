@@ -61,4 +61,11 @@ class ChangelogUtils
 		branch = `git branch --no-color 2> /dev/null`.strip.scan(/\*\s(.*)/)
 		return branch[0][0] if branch.size()>0 and branch[0].size()>0
 	end 
+
+	def self.validateNoChangeInCurrentWorkspace
+		if `git status -s`.strip != ""
+			puts "you have changes in your repository. Commit or discard changes before using changelog"
+			exit
+		end
+	end
 end
