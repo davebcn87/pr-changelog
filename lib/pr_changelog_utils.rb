@@ -13,10 +13,6 @@ class ChangelogUtils
 		end
 	end
   
-	def self.isXcodeDirectory  
-		projectName = ChangelogUtils.getProjectName
-		return projectName != nil
-	end
 
 	def self.plistFile
 		projectName = ChangelogUtils.getProjectName
@@ -62,10 +58,31 @@ class ChangelogUtils
 		return branch[0][0] if branch.size()>0 and branch[0].size()>0
 	end 
 
+	def self.isXcodeDirectory  
+		projectName = ChangelogUtils.getProjectName
+		if projectName == nil
+			puts "changelog should be used in a xcode directory" 
+			exit
+		end
+	end
+
 	def self.validateNoChangeInCurrentWorkspace
 		if `git status -s`.strip != ""
 			puts "you have changes in your repository. Commit or discard changes before using changelog"
 			exit
 		end
+	end
+
+	def self.validateGitExists
+		if Dir[".git"].first == nil
+			puts "no git project found. changelog should be used in a git project."
+			exit
+		end
+	end
+
+	def self.validateCurrentDirectory
+		ChangelogUtils.validateGitExists
+		ChangelogUtils.validateNoChangeInCurrentWorkspace
+		ChangelogUtils.isXcodeDirectory
 	end
 end

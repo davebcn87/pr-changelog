@@ -14,19 +14,17 @@ command :show do |c|
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-  	ChangelogUtils.validateNoChangeInCurrentWorkspace
-	if !ChangelogUtils.isXcodeDirectory
-		puts "changelog should be used in a xcode directory"
-	else
-		currentVersion = ChangelogUtils.showVersion
-		puts currentVersion
-		puts "=============="
 
-		while (ChangelogUtils.showVersion == currentVersion)
-			ChangelogUtils.goBack
-			if (ChangelogUtils.isPullRequestMerge)
-				 puts ChangelogUtils.printCurrentChange
-			end
+  	ChangelogUtils.validateCurrentDirectory
+
+	currentVersion = ChangelogUtils.showVersion
+	puts currentVersion
+	puts "=============="
+
+	while (ChangelogUtils.showVersion == currentVersion)
+		ChangelogUtils.goBack
+		if (ChangelogUtils.isPullRequestMerge)
+			 puts ChangelogUtils.printCurrentChange
 		end
 	end
 
