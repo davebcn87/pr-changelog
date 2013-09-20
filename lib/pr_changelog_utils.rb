@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'xcoder'
-
 class ChangelogUtils
 
 	attr_accessor :branch_name
@@ -16,15 +14,18 @@ class ChangelogUtils
 	end
   
 
-	def self.showVersion
-		projectName = self.getProjectName
-		project="#{projectName}.xcodeproj"
-		config="Debug"
+	def self.plistFile
+		projectName = ChangelogUtils.getProjectName
+	   plistFile = Dir["#{Dir.pwd}/*/#{projectName}-Info.plist"]
+  		if (plistFile.size() > 0)
+   	   return plistFile[0]
+	  	else 
+   	   return nil
+	  	end
+	end
 
-		config = Xcode.project(project).target(projectName).config(config)
-		version = config.info_plist.version
-		`git checkout .` #reset all modified files by xcoder but I don't like this solution
-		version
+	def self.showVersion
+		`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" #{ChangelogUtils.plistFile}`.strip
 	end
 	
 	def self.printCurrentChange
