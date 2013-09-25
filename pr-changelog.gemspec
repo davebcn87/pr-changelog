@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'pr-changelog'
-  s.version     = '0.1.4'
+  s.version     = '0.1.6'
   s.date        = '2013-09-10'
   s.executables << 'chlog'
   s.summary     = "Create a changelog for an iOS app using git history of Pull Requests already merged and xcode version"
@@ -12,5 +12,6 @@ Gem::Specification.new do |s|
 	 'https://github.com/davebcn87/pr-changelog'
   s.license       = 'MIT'
   s.add_dependency "commander", "~> 4.1.5"
+  s.add_dependency "xcoder"
   s.require_paths = ["lib"]
 end
