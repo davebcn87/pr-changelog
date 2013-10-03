@@ -28,8 +28,17 @@ class ChangelogUtils
 		`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" #{ChangelogUtils.plistFile}`.strip
 	end
 	
-	def self.printCurrentChange
-		" * #{ChangelogUtils.getLastMessageFromGit.strip} (#{ChangelogUtils.getPullRequestHash.strip})"
+	def self.printCurrentChange (options)
+		if (options.char)
+			if (options.char != ChangelogUtils.getLastMessageFromGit.strip[0])
+				return 
+			end
+		end
+		if (!options.nobullet)
+			" * #{ChangelogUtils.getLastMessageFromGit.strip} (#{ChangelogUtils.getPullRequestHash.strip})"
+		else
+			"#{ChangelogUtils.getLastMessageFromGit.strip} (#{ChangelogUtils.getPullRequestHash.strip})"
+		end
 	end
 	
 	def self.goBack

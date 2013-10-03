@@ -8,27 +8,37 @@ program :version, '0.0.1'
 program :description, 'changelog will make a change log for an iOS project for current version'
  
 command :show do |c|
-  c.syntax = 'changelog show [options]'
+  c.syntax = 'chlog show [options]'
   c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.description = 'Show the changelog of the project in the current version'
+  c.example 'show last change', 'chlog show -l 1'
+  c.option '--char STRING', String, 'A character that should begin the PR message'
+  c.option '--l LINES', Integer, 'Number of lines of changelog show'
+  c.option '--noversion', 'Don\'t show a title with the number of version'
+  c.option '--nobullet', 'Don\'t show a bullet in the beggining of a PR message'
   c.action do |args, options|
+
+	currentVersion = ChangelogUtils.showVersion
+	if !options.noversion
+		puts currentVersion
+		puts "=============="
+	end
 
   	ChangelogUtils.validateCurrentDirectory
 
-	currentVersion = ChangelogUtils.showVersion
-	puts currentVersion
-	puts "=============="
-
+	count = 0 
 	while (ChangelogUtils.showVersion == currentVersion)
 		ChangelogUtils.goBack
 		if (ChangelogUtils.isPullRequestMerge)
-			 puts ChangelogUtils.printCurrentChange
+			 if (options.l and options.l == count)
+				break
+			 end
+			 message = ChangelogUtils.printCurrentChange(options)
+			 puts message if message
+			 count = count + 1
 		end
 	end
 
 	ChangelogUtils.goForward
   end
 end
-
