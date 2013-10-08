@@ -25,6 +25,7 @@ command :show do |c|
 	end
 
   	ChangelogUtils.validateCurrentDirectory
+  	ChangelogUtils.saveState
 
 	count = 0 
 	while (ChangelogUtils.showVersion == currentVersion)
@@ -40,5 +41,6 @@ command :show do |c|
 	end
 
 	ChangelogUtils.goForward
+  	ChangelogUtils.restoreState
   end
 end

@@ -3,6 +3,7 @@
 class ChangelogUtils
 
 	attr_accessor :branch_name
+	attr_accessor :state_changed
 
 	def self.getProjectName
 		projectFiles = Dir["*.xcodeproj"]
@@ -77,8 +78,7 @@ class ChangelogUtils
 
 	def self.validateNoChangeInCurrentWorkspace
 		if `git status -s`.strip != ""
-			puts "you have changes in your repository. Commit or discard changes before using changelog"
-			exit
+			@state_changed = true
 		end
 	end
 
@@ -93,5 +93,17 @@ class ChangelogUtils
 		ChangelogUtils.validateGitExists
 		ChangelogUtils.validateNoChangeInCurrentWorkspace
 		ChangelogUtils.isXcodeDirectory
+	end
+	
+	def self.saveState 
+		if @state_changed
+			`git stash` 
+		end
+	end
+
+	def self.restoreState
+		if @state_changed
+			`git stash pop` 
+		end
 	end
 end
