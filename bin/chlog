@@ -36,7 +36,7 @@ command :show do |c|
 			 end
 			 message = ChangelogUtils.printCurrentChange(options)
 			 puts message if message
-			 count = count + 1
+			 count = count + 1 if message
 		end
 	end
 
