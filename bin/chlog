@@ -28,7 +28,7 @@ command :show do |c|
 
 	count = 0 
 	while (ChangelogUtils.showVersion == currentVersion)
-		ChangelogUtils.goBack
+		
 		if (ChangelogUtils.isPullRequestMerge)
 			 if (options.l and options.l == count)
 				break
@@ -37,6 +37,11 @@ command :show do |c|
 			 puts message if message
 			 count = count + 1
 		end
+
+		if (count != 0)
+			ChangelogUtils.goBack			
+		end
+		
 	end
 
 	ChangelogUtils.goForward
