@@ -40,9 +40,7 @@ command :show do |c|
 			 count = count + 1 if message
 		end
 
-		if (count != 0)
-			ChangelogUtils.goBack			
-		end
+		ChangelogUtils.goBack			
 		
 	end
 
